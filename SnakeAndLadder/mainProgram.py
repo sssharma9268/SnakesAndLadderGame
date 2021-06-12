@@ -1,5 +1,6 @@
 import random
 
+
 class SnakesAndLadders:
     def __init__(self):
         # normal die
@@ -17,20 +18,32 @@ class SnakesAndLadders:
         }
 
         self.ladders = {
-            6: 25,
+            6: 14,
             11: 24,
             18: 40,
             48: 97,
             60: 88
         }
 
+    def getSnakesPostion(self):
+        return self.snakes
+
+    def getLadderPostion(self):
+        return self.ladders
+
+    def playWithNormalDie(self):
+        return random.choice(self.normalDie)
+
+    def playWithCrookedDie(self):
+        return random.choice(self.crookedDie)
+
     def beginGame(self):
-        turns = 10
+        turns = 100
         currPos = 0
         print("Beginning game...")
-
+        sl = SnakesAndLadders()
         for turn in range(turns):
-            dieValue = random.choice(self.normalDie)
+            dieValue = sl.playWithNormalDie()
             currPos += dieValue
             if currPos == 100:
                 return "Won the game!"
@@ -42,6 +55,13 @@ class SnakesAndLadders:
                 currPos = self.ladders[currPos]
         return "Game lost!"
 
+
 if __name__ == '__main__':
-    for i in range(10):
-        print(SnakesAndLadders().beginGame())
+    wonCount = 0
+    # print(SnakesAndLadders().beginGame())
+    for i in range(2000):
+        if "Won" in SnakesAndLadders().beginGame():
+            wonCount += 1
+
+    print("Winning Probability= ", (wonCount / 2000) * 100)
+    #When our turns are less the probability of wining is also less
