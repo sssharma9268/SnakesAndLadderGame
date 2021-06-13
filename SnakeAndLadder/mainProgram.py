@@ -18,12 +18,18 @@ class SnakesAndLadders:
         }
 
         self.ladders = {
-            6: 14,
+            6: 25,
             11: 24,
             18: 40,
             48: 97,
             60: 88
         }
+
+    def getNormalDie(self):
+        return self.normalDie
+
+    def getCrookedDie(self):
+        return self.crookedDie
 
     def getSnakesPostion(self):
         return self.snakes
@@ -49,10 +55,10 @@ class SnakesAndLadders:
                 return "Won the game!"
             elif currPos > 100:
                 continue
-            elif currPos in self.snakes:
-                currPos = self.snakes[currPos]
-            elif currPos in self.ladders:
-                currPos = self.ladders[currPos]
+            elif currPos in self.getSnakesPostion():
+                currPos = self.getSnakesPostion()[currPos]
+            elif currPos in self.getLadderPostion():
+                currPos = self.getLadderPostion()[currPos]
         return "Game lost!"
 
 
